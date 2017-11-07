@@ -27,3 +27,23 @@ export function createPost(values, callback) {
     payload: request
   };
 }
+
+export function fetchPost(id) {
+  const request = axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
+
+  return {
+    type: FETCH_POST,
+    payload: request
+  };
+}
+
+export function deletePost(id, callback) {
+  const request = axios
+    .delete(`${ROOT_URL}/posts/${id}${API_KEY}`)
+    .then(() => callback());
+
+  return {
+    type: DELETE_POST,
+    payload: id
+  };
+}
